@@ -13,9 +13,13 @@ public class nodeDrag : MonoBehaviour
     private ScrollRect sr;
     private Vector3 offset;
     // Start is called before the first frame update
-    void Start()
+    public void Awake()
     {
         clicktime = GameManager.dragtime;
+       
+    }
+    void Start()
+    {
         sr = GameManager.sr;
         contentScaler.updateBounds(this.rt.position, rt.sizeDelta);
     }

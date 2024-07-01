@@ -15,12 +15,16 @@ public class contentScaler : MonoBehaviour
     public RectTransform scale;
 
     // Start is called before the first frame update
-    public void Start()
+    public void Awake()
     {
         padding = new Vector2(30, 30);
         height = content.rect.height;
         width = content.rect.width;
         inst = this;
+    }
+    public void Start()
+    {
+        
         ForceUpdate();
     }
 
