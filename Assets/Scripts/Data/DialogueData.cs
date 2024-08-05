@@ -1,38 +1,31 @@
 using UnityEngine;
+using System.Collections.Generic;
 
-public enum VarOperators
-{
-    ADD, SUB, MUL, DIV, EXP, LOG10, LOG, LESSTHAN, GREATERTHAN, EQUAL, LESSEQUAL, GREATEREQUAL
-}
-public struct CharacterData {
-    public string charName;
-}
-public struct OptionData
-{
-    public VarConstOperation[] constCheck;
-    public VarVarOperation[] varCheck;
-    public string title;
-    public int id;
-}
-public struct VarConstOperation
-{
-    public string varName;
-    public VarOperators op;
-    public float num;
-}
-public struct VarVarOperation
-{
-    public string varName;
-    public VarOperators op;
-    public string var2Name;
-}
 public class DialogueData
 {
     public int id;
     public string title;
     public string line;
-    public OptionData[] options;
+    public OptionData[] options = new OptionData[0];
     public VarConstOperation[] variableConstantOperations;
     public VarVarOperation[] variableVariableOperations;
-    
+
+    //left to right
+    public int[] charIDs;
+
+    //-1,0,1 for left, center, right
+    public int charCurrentlySpeaking;
+    public DialogueData() { }
+    public DialogueData(DialogueData dd) {
+        
+        id = dd.id;
+        title = dd.title;
+        line = dd.line;
+        options = dd.options ;
+        variableConstantOperations = dd.variableConstantOperations;
+        variableVariableOperations = dd.variableVariableOperations;
+        charIDs = dd.charIDs;
+        charCurrentlySpeaking = dd.charCurrentlySpeaking;
+}
+
 }
