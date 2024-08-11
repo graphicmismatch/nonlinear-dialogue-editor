@@ -1,33 +1,75 @@
 using UnityEngine;
-
+using TMPro;
+using UnityEngine.UI;
+using System.Collections.Generic;
 public class EditPanelManager : MonoBehaviour
 {
 
     public DialogueOBJ currentlyEditing;
     public static EditPanelManager inst;
 
+    public GameObject Panel;
+    public TMP_InputField title;
+    public TMP_Text id;
+
+    public TMP_Dropdown[] charSel;
+    public Toggle[] speakSel;
+
+    public TMP_InputField content;
+
+    public ConnectionDisplayManager cdm;
+
     private void Awake()
     {
         inst = this;
-    }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
+
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void Load(DialogueOBJ d) {
+        Panel.SetActive(true);
+        currentlyEditing = d;
+        title.text = currentlyEditing.dd.title;
+        id.text = currentlyEditing.dd.id + "";
+        content.text = currentlyEditing.dd.line;
+        cdm.init();
+        int j = 0;
+        foreach (var v in charSel) {
+            v.ClearOptions();
+            v.AddOptions(genCharTitles(DialogueTreeManager.tree.chars.ToArray()));
+            v.value = currentlyEditing.dd.charIDs[j];
+            j++;
+        }
+        for (int i = 0; i < speakSel.Length; i++) {
+            speakSel[i].isOn = i == currentlyEditing.dd.charCurrentlySpeaking-1;
+        }
     }
 
+    public void onClosePanel() {
+        currentlyEditing.UpdateDisplay();
+    }
+    List<string> genCharTitles(Character[] op)
+    {
+        List<string> temp = new List<string>();
+        foreach(Character o in op)
+        {
+            temp.Add(o.Name);
+        }
+        return temp;
+    }
+    public void EditTitle(string value) {
+        currentlyEditing.dd.title = value;
+    }
     public void EditCharacter(int id, int value) {
         currentlyEditing.dd.charIDs[id] = value;
     }
     public void EditSpeaking(int id)
     {
         currentlyEditing.dd.charCurrentlySpeaking = id;
+    }
+    public void ClearSpeaking()
+    {
+        currentlyEditing.dd.charCurrentlySpeaking = -1;
     }
     public void EditLine(string value)
     {
@@ -37,6 +79,14 @@ public class EditPanelManager : MonoBehaviour
     {
         currentlyEditing.dd.options[id].id = connID;
         currentlyEditing.dd.options[id].title = value;
+    }
+    public void EditConnection(int id, string value)
+    {
+        currentlyEditing.dd.options[id].title = value;
+    }
+    public void EditConnection(int id, int connID)
+    {
+        currentlyEditing.dd.options[id].id = connID;
     }
     public void AddConnection()
     {

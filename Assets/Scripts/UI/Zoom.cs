@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using UnityEngine.UI;
 public class Zoom : MonoBehaviour
 {
     public RectTransform rt;
@@ -8,6 +8,7 @@ public class Zoom : MonoBehaviour
     public float zoomInSens;
     public float zoomOutSens;
     public Vector2 zoomBounds;
+    public Slider zoomSlider;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -37,7 +38,21 @@ public class Zoom : MonoBehaviour
             curScale = Mathf.Clamp(curScale, zoomBounds.x, zoomBounds.y);
             rt.localScale = Vector3.one * curScale;
             contentScaler.updateZoom();
+            zoomSlider.value = curScale;
         }
         
+    }
+
+    public void setScroll(float n) {
+        curScale = n;
+        rt.localScale = Vector3.one * curScale;
+        contentScaler.updateZoom();
+    }
+    public void resetScroll()
+    {
+        curScale = 1;
+        rt.localScale = Vector3.one * curScale;
+        contentScaler.updateZoom();
+        zoomSlider.value = curScale;
     }
 }

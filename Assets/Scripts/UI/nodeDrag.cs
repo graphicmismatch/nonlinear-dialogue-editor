@@ -32,11 +32,23 @@ public class nodeDrag : MonoBehaviour
             clicked = but.buttonPressed;
             if (clicked) {
                 offset = rt.position - (Vector3)Mouse.current.position.value;
+                sr.enabled = false;
             }
         }
         if (clicked)
         {
-            sr.enabled = false;
+            if (!Mouse.current.press.isPressed)
+            {
+                if (clickdur < clicktime)
+                {
+                    EditPanelManager.inst.Load(GetComponent<DialogueOBJ>());
+                }
+                clicked = false;
+                clickdur = 0;
+                sr.enabled = true;
+
+            }
+            
             if (clickdur >= clicktime)
             {
                 rt.position = (Vector3)Mouse.current.position.value +offset;
@@ -44,13 +56,7 @@ public class nodeDrag : MonoBehaviour
             }
 
             clickdur += Time.deltaTime;
-            if (!Mouse.current.press.isPressed)
-            {
-                clicked = false;
-                clickdur = 0;
-                sr.enabled = true;
-                
-            }
+            
            
         }
         

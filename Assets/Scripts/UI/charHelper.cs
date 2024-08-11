@@ -7,4 +7,10 @@ public class charHelper : MonoBehaviour
     public void editchar(int value) {
         EditPanelManager.inst.EditCharacter(id, value);
     }
+    public void currentlySpeaking(bool t) {
+        if (t) {
+            EditPanelManager.inst.EditSpeaking(id);
+        }
+    }
+    
 }
