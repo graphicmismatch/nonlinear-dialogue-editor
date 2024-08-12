@@ -40,6 +40,9 @@ public class ConnectionDisplayManager : MonoBehaviour
     }
     public void UpdateConnId(string value)
     {
+        if (value == null || value == "") {
+            value = "0";
+        }
         EditPanelManager.inst.EditConnection(currID, int.Parse(value));
     }
     public void UpdateConnText(string value)

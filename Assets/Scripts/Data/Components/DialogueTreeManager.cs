@@ -1,8 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
-
-
+using Newtonsoft.Json;
+using System.IO;
 
 
 public class DialogueTreeManager : MonoBehaviour
@@ -25,5 +25,21 @@ public class DialogueTreeManager : MonoBehaviour
     public void newDialogue() {
         GameObject g = Instantiate(dialoguePrefab, dParent);
         g.GetComponent<DialogueOBJ>().Init();
+    }
+
+    public void export() {
+        DialogueTree export = new DialogueTree();
+        export.chars = chars.ToArray();
+        export.dialogues = dialogues.Values.ToArray<DialogueData>();
+        export.variables = variables;
+        string exp = JsonConvert.SerializeObject(export,Formatting.Indented);
+        if (!File.Exists(Application.persistentDataPath + "/export.wasde"))
+        {
+           FileStream fs =  File.Create(Application.persistentDataPath + "/export.wasde");
+            fs.Close();
+        }
+        File.WriteAllText(Application.persistentDataPath + "/export.wasde",exp);
+        
+        Application.OpenURL(Application.persistentDataPath);
     }
 }

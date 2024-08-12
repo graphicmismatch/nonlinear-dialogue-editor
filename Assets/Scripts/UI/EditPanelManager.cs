@@ -41,8 +41,9 @@ public class EditPanelManager : MonoBehaviour
             j++;
         }
         for (int i = 0; i < speakSel.Length; i++) {
-            speakSel[i].isOn = i == currentlyEditing.dd.charCurrentlySpeaking-1;
+            speakSel[i].isOn = i == currentlyEditing.dd.charCurrentlySpeaking;
         }
+
     }
 
     public void onClosePanel() {
@@ -77,6 +78,9 @@ public class EditPanelManager : MonoBehaviour
     }
     public void EditConnection(int id, int connID, string value)
     {
+        if (connID == null) {
+            connID = 0;
+        }
         currentlyEditing.dd.options[id].id = connID;
         currentlyEditing.dd.options[id].title = value;
     }
@@ -86,6 +90,10 @@ public class EditPanelManager : MonoBehaviour
     }
     public void EditConnection(int id, int connID)
     {
+        if (connID == null)
+        {
+            connID = 0;
+        }
         currentlyEditing.dd.options[id].id = connID;
     }
     public void AddConnection()

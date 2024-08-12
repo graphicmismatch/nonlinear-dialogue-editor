@@ -25,14 +25,15 @@ public class DialogueOBJ : MonoBehaviour
     }
     public void Init() {
         dd = new DialogueData();
-        DialogueTreeManager.tree.dREF.Add(this);
-        DialogueTreeManager.tree.dialogues.Add(this, dd);
+        
         if (DialogueTreeManager.tree.dialogues.Count > 1)
         {
             dd = new DialogueData(DialogueTreeManager.tree.dREF[DialogueTreeManager.tree.dialogues.Count - 2].dd);
         }
       
-        dd.id = DialogueTreeManager.tree.dREF.Count - 1;
+        dd.id = DialogueTreeManager.tree.dREF.Count ;
+        DialogueTreeManager.tree.dREF.Add(this);
+        DialogueTreeManager.tree.dialogues.Add(this, dd);
         UpdateDisplay();
 
     }
