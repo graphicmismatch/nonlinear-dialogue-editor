@@ -27,19 +27,62 @@ public class DialogueTreeManager : MonoBehaviour
         g.GetComponent<DialogueOBJ>().Init();
     }
 
-    public void export() {
-        DialogueTree export = new DialogueTree();
-        export.chars = chars.ToArray();
-        export.dialogues = dialogues.Values.ToArray<DialogueData>();
-        export.variables = variables;
-        string exp = JsonConvert.SerializeObject(export,Formatting.Indented);
-        if (!File.Exists(Application.persistentDataPath + "/export.wasde"))
+    public void export(string path, string filename) {
+        try
         {
-           FileStream fs =  File.Create(Application.persistentDataPath + "/export.wasde");
-            fs.Close();
+            DialogueTree export = new DialogueTree();
+            export.chars = chars.ToArray();
+            export.dialogues = dialogues.Values.ToArray<DialogueData>();
+            export.variables = variables;
+            string exp = JsonConvert.SerializeObject(export, Formatting.Indented);
+
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            if (!File.Exists(path + "/" + filename + ".wasde"))
+            {
+                FileStream fs = File.Create(path + "/" + filename + ".wasde");
+                fs.Close();
+            }
+            File.WriteAllText(path + "/" + filename + ".wasde", exp);
+
+            Application.OpenURL(path);
         }
-        File.WriteAllText(Application.persistentDataPath + "/export.wasde",exp);
-        
-        Application.OpenURL(Application.persistentDataPath);
+        catch {
+            return;
+        }
+    }
+    public void Save(string path, string filename)
+    {
+        try
+        {
+            DialogueTreeSave export = new DialogueTreeSave();
+            export.chars = chars.ToArray();
+            List<DialogueObjSave> ds = new List<DialogueObjSave>();
+            foreach (DialogueOBJ v in dREF) {
+                ds.Add(new DialogueObjSave(v.dd,v.gameObject.transform.localPosition));
+            }
+            export.dialogues = ds.ToArray();
+            export.variables = variables;
+            string exp = JsonConvert.SerializeObject(export, Formatting.Indented);
+
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            if (!File.Exists(path + "/" + filename + ".was"))
+            {
+                FileStream fs = File.Create(path + "/" + filename + ".was");
+                fs.Close();
+            }
+            File.WriteAllText(path + "/" + filename + ".was", exp);
+
+            Application.OpenURL(path);
+        }
+        catch
+        {
+            return;
+        }
     }
 }
