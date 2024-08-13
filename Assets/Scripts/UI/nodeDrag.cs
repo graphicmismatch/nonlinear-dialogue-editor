@@ -12,6 +12,7 @@ public class nodeDrag : MonoBehaviour
     public ButtonHold but;
     private ScrollRect sr;
     private Vector3 offset;
+    public DialogueOBJ thisd;
     // Start is called before the first frame update
     public void Awake()
     {
@@ -53,6 +54,7 @@ public class nodeDrag : MonoBehaviour
             {
                 rt.position = (Vector3)Mouse.current.position.value +offset;
                 contentScaler.updateBounds(this.rt.anchoredPosition, rt.sizeDelta);
+                DialogueTreeManager.tree.refreshLines.Invoke();
             }
 
             clickdur += Time.deltaTime;

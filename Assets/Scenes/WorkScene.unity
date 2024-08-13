@@ -563,6 +563,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dREF: []
+  folder: 
+  file: 
   dParent: {fileID: 1383115786}
   dialoguePrefab: {fileID: 2717374902573159580, guid: c2b3f8769eb063c47a474287cfccb440, type: 3}
 --- !u!1 &86773036
@@ -3057,7 +3059,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 331803800}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 79104978}
+        m_TargetAssemblyTypeName: DialogueTreeManager, Assembly-CSharp
+        m_MethodName: Save
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &331803800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4786,7 +4800,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &553432552
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8671,6 +8685,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8629ba6fb378284bac03a363bc14c1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panel: {fileID: 553432551}
+  folder: {fileID: 1329694198}
+  file: {fileID: 1572681616}
 --- !u!1 &1032079194
 GameObject:
   m_ObjectHideFlags: 0
@@ -9676,8 +9693,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1136927776}
   m_HandleRect: {fileID: 0}
   m_Direction: 0
-  m_Value: 0.5
-  m_Size: 0.85952425
+  m_Value: 0.5000006
+  m_Size: 0.9231596
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -11117,7 +11134,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 826054704}
   m_Direction: 0
   m_Value: 1
-  m_Size: 0.99999994
+  m_Size: 0.9999999
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -12123,7 +12140,19 @@ MonoBehaviour:
       m_Calls: []
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1029795259}
+        m_TargetAssemblyTypeName: SavePanelManager, Assembly-CSharp
+        m_MethodName: updateFolder
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnTouchScreenKeyboardStatusChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -13861,7 +13890,19 @@ MonoBehaviour:
       m_Calls: []
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1029795259}
+        m_TargetAssemblyTypeName: SavePanelManager, Assembly-CSharp
+        m_MethodName: updateFile
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnTouchScreenKeyboardStatusChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -15259,7 +15300,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: EXPORT
+  m_text: Save/Export
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -18319,13 +18360,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 79104978}
+        m_TargetAssemblyTypeName: DialogueTreeManager, Assembly-CSharp
+        m_MethodName: export
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -18591,7 +18632,7 @@ GameObject:
   - component: {fileID: 2133272621}
   - component: {fileID: 2133272620}
   m_Layer: 5
-  m_Name: Export
+  m_Name: openSavePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18615,7 +18656,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: -130.02002, y: -0.00034332275}
-  m_SizeDelta: {x: 137.8548, y: 41.808}
+  m_SizeDelta: {x: 175.2282, y: 41.808}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &2133272620
 MonoBehaviour:
@@ -18661,9 +18702,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 79104978}
-        m_TargetAssemblyTypeName: DialogueTreeManager, Assembly-CSharp
-        m_MethodName: export
+      - m_Target: {fileID: 1029795259}
+        m_TargetAssemblyTypeName: SavePanelManager, Assembly-CSharp
+        m_MethodName: loadPanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

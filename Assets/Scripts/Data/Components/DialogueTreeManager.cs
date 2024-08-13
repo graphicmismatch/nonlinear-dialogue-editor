@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using System.IO;
-
+using UnityEngine.Events;
 
 public class DialogueTreeManager : MonoBehaviour
 {
@@ -12,7 +12,9 @@ public class DialogueTreeManager : MonoBehaviour
     public List<Character> chars = new List<Character>();
     public Dictionary<DialogueOBJ,DialogueData> dialogues = new Dictionary<DialogueOBJ, DialogueData>();
     public static DialogueTreeManager tree;
-
+    public UnityEvent refreshLines;
+    public string folder;
+    public string file;
 
     public Transform dParent;
     public GameObject dialoguePrefab;
@@ -21,13 +23,17 @@ public class DialogueTreeManager : MonoBehaviour
     {
         tree = this;
     }
-
+    public void loadFile(DialogueTreeSave dts) { 
+    
+    }
     public void newDialogue() {
         GameObject g = Instantiate(dialoguePrefab, dParent);
+        
         g.GetComponent<DialogueOBJ>().Init();
+        refreshLines.Invoke();
     }
 
-    public void export(string path, string filename) {
+    public void export() {
         try
         {
             DialogueTree export = new DialogueTree();
@@ -36,24 +42,26 @@ public class DialogueTreeManager : MonoBehaviour
             export.variables = variables;
             string exp = JsonConvert.SerializeObject(export, Formatting.Indented);
 
-            if (!Directory.Exists(path))
+            if (!Directory.Exists(folder))
             {
-                Directory.CreateDirectory(path);
+                Directory.CreateDirectory(folder);
             }
-            if (!File.Exists(path + "/" + filename + ".wasde"))
+            if (!File.Exists(folder + "/" + file + ".wasde"))
             {
-                FileStream fs = File.Create(path + "/" + filename + ".wasde");
+                FileStream fs = File.Create(folder + "/" + file + ".wasde");
                 fs.Close();
             }
-            File.WriteAllText(path + "/" + filename + ".wasde", exp);
+            File.WriteAllText(folder + "/" + file + ".wasde", exp);
 
-            Application.OpenURL(path);
+            Application.OpenURL(folder);
         }
         catch {
             return;
         }
     }
-    public void Save(string path, string filename)
+
+
+    public void Save()
     {
         try
         {
@@ -67,18 +75,18 @@ public class DialogueTreeManager : MonoBehaviour
             export.variables = variables;
             string exp = JsonConvert.SerializeObject(export, Formatting.Indented);
 
-            if (!Directory.Exists(path))
+            if (!Directory.Exists(folder))
             {
-                Directory.CreateDirectory(path);
+                Directory.CreateDirectory(folder);
             }
-            if (!File.Exists(path + "/" + filename + ".was"))
+            if (!File.Exists(folder + "/" + file + ".was"))
             {
-                FileStream fs = File.Create(path + "/" + filename + ".was");
+                FileStream fs = File.Create(folder + "/" + file + ".was");
                 fs.Close();
             }
-            File.WriteAllText(path + "/" + filename + ".was", exp);
+            File.WriteAllText(folder + "/" + file + ".was", exp);
 
-            Application.OpenURL(path);
+            Application.OpenURL(folder);
         }
         catch
         {
