@@ -44,30 +44,12 @@ public struct Character
 }
 public class DialogueObjSave
 {
-    public int id;
-    public string title;
-    public string line;
-    public OptionData[] options = new OptionData[0];
-    public VarConstOperation[] variableConstantOperations;
-    public VarVarOperation[] variableVariableOperations;
-
-    //left to right
-    public int[] charIDs = new int[3];
-
-    //-1,0,1 for left, center, right
-    public int charCurrentlySpeaking;
+    public DialogueData data;
     public float[] pos;
     public DialogueObjSave(DialogueData dd, Vector3 p)
     {
 
-        id = dd.id;
-        title = dd.title;
-        line = dd.line;
-        options = dd.options;
-        variableConstantOperations = dd.variableConstantOperations;
-        variableVariableOperations = dd.variableVariableOperations;
-        charIDs = dd.charIDs;
-        charCurrentlySpeaking = dd.charCurrentlySpeaking;
+        data = dd;
         pos = new float[3]{p.x, p.y, p.z};
     }
 }

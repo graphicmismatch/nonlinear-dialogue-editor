@@ -14,18 +14,34 @@ public class CharCreatorManager : MonoBehaviour
     {
         inst = this;
         chars = new List<CharacterObj>();
-        chars.Add(nullchar);
+
        
     }
     void Start()
     {
+        
+    }
+    public void init() {
         Character nc = new Character();
         nc.id = 0;
         nc.Name = "No Character";
+        chars.Add(nullchar);
         DialogueTreeManager.tree.chars.Add(nc);
     }
-
     public void spawnChar() {
-        Instantiate(charObj, parent.transform);
+        GameObject g =Instantiate(charObj, parent.transform);
+        g.GetComponent<CharacterObj>().init();
+    }
+    public void loadChar(Character[] sd)
+    {
+        init();
+        foreach (Character s in sd)
+        {
+            if (s.id != 0) {
+                GameObject g = Instantiate(charObj, parent.transform);
+                g.GetComponent<CharacterObj>().loadChar(s.Name);
+            }
+            
+        }
     }
 }

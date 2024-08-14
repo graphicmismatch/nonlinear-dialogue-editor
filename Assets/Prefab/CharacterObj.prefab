@@ -707,6 +707,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   idText: {fileID: 7667994589403515147}
+  name: {fileID: 605815372752530759}
   isNullchar: 0
 --- !u!1 &8357727512077059423
 GameObject:

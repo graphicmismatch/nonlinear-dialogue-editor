@@ -6,9 +6,14 @@ public class CharacterObj : MonoBehaviour
     public int id;
 
     public TMP_Text idText;
+    public TMP_InputField name;
     public bool isNullchar;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
+    {
+
+    }
+    public void init()
     {
         if (!isNullchar)
         {
@@ -19,7 +24,21 @@ public class CharacterObj : MonoBehaviour
             UpdateID();
         }
     }
-    public void UpdateID() {
+    public void loadChar(string s)
+    {
+        if (!isNullchar)
+        {
+            CharCreatorManager.inst.chars.Add(this);
+            CharCreatorManager.inst.forceReload.AddListener(UpdateID);
+            Character nc = new Character();
+            nc.Name = s;
+            DialogueTreeManager.tree.chars.Add(nc);
+            UpdateID();
+            name.text = s;
+        }
+    }
+    public void UpdateID()
+    {
         id = CharCreatorManager.inst.chars.IndexOf(this);
         idText.text = id + "";
         Character c = DialogueTreeManager.tree.chars[id];
@@ -32,7 +51,8 @@ public class CharacterObj : MonoBehaviour
         c.Name = n;
         DialogueTreeManager.tree.chars[id] = c;
     }
-    public void deleteElement() {
+    public void deleteElement()
+    {
         CharCreatorManager.inst.chars.Remove(this);
         DialogueTreeManager.tree.chars.RemoveAt(id);
         CharCreatorManager.inst.forceReload.RemoveListener(UpdateID);
@@ -42,6 +62,6 @@ public class CharacterObj : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

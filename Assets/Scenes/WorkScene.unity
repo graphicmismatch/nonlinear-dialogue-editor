@@ -286,6 +286,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   idText: {fileID: 760770652}
+  name: {fileID: 0}
   isNullchar: 1
 --- !u!1 &73804352
 GameObject:
@@ -563,6 +564,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dREF: []
+  refreshLines:
+    m_PersistentCalls:
+      m_Calls: []
+  fullLineRefresh:
+    m_PersistentCalls:
+      m_Calls: []
   folder: 
   file: 
   dParent: {fileID: 1383115786}
@@ -7283,7 +7290,7 @@ MonoBehaviour:
   m_Text: NoCharacter
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
-  m_ReadOnly: 0
+  m_ReadOnly: 1
   m_RichText: 1
   m_GlobalFontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_OnFocusSelectAll: 1
@@ -9693,8 +9700,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1136927776}
   m_HandleRect: {fileID: 0}
   m_Direction: 0
-  m_Value: 0.5000006
-  m_Size: 0.9231596
+  m_Value: 0.4999989
+  m_Size: 0.95632154
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

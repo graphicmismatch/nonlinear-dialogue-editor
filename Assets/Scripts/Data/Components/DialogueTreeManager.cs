@@ -19,13 +19,41 @@ public class DialogueTreeManager : MonoBehaviour
 
     public Transform dParent;
     public GameObject dialoguePrefab;
+    private bool updated = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         tree = this;
+        
     }
-    public void loadFile(DialogueTreeSave dts) { 
-    
+    private void Start()
+    {
+        if (TheOnlySingletonNeeded.loaded)
+        {
+            loadFile(TheOnlySingletonNeeded.save);
+            updated = true;
+        }
+        else
+        {
+            CharCreatorManager.inst.init();
+        }
+
+    }
+    private void Update()
+    {
+        if (updated) {
+            updated = false;
+            fullLineRefresh.Invoke();
+        }
+    }
+    public void loadFile(DialogueTreeSave dts) {
+
+        CharCreatorManager.inst.loadChar(dts.chars);
+        variables = dts.variables;
+        foreach (DialogueObjSave d in dts.dialogues) {
+            newDialogue(d.data,d.pos);
+        }
+
     }
     public void newDialogue() {
         GameObject g = Instantiate(dialoguePrefab, dParent);
@@ -33,7 +61,14 @@ public class DialogueTreeManager : MonoBehaviour
         g.GetComponent<DialogueOBJ>().Init();
         fullLineRefresh.Invoke();
     }
+    public void newDialogue(DialogueData dd, float[] pos)
+    {
+        GameObject g = Instantiate(dialoguePrefab, dParent);
+        g.transform.localPosition = new Vector3(pos[0], pos[1], pos[2]);
+        g.GetComponent<DialogueOBJ>().loadData(dd);
+        fullLineRefresh.Invoke();
 
+    }
     public void export() {
         try
         {

@@ -40,9 +40,9 @@ public class EditPanelManager : MonoBehaviour
             v.value = currentlyEditing.dd.charIDs[j];
             j++;
         }
-        for (int i = 0; i < speakSel.Length; i++) {
-            speakSel[i].isOn = i == currentlyEditing.dd.charCurrentlySpeaking;
-        }
+
+            speakSel[currentlyEditing.dd.charCurrentlySpeaking].isOn = true;
+
 
     }
 
