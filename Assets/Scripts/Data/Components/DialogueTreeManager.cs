@@ -13,6 +13,7 @@ public class DialogueTreeManager : MonoBehaviour
     public Dictionary<DialogueOBJ,DialogueData> dialogues = new Dictionary<DialogueOBJ, DialogueData>();
     public static DialogueTreeManager tree;
     public UnityEvent refreshLines;
+    public UnityEvent fullLineRefresh;
     public string folder;
     public string file;
 
@@ -30,7 +31,7 @@ public class DialogueTreeManager : MonoBehaviour
         GameObject g = Instantiate(dialoguePrefab, dParent);
         
         g.GetComponent<DialogueOBJ>().Init();
-        refreshLines.Invoke();
+        fullLineRefresh.Invoke();
     }
 
     public void export() {

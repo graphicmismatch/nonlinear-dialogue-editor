@@ -19,6 +19,7 @@ public class DialogueOBJ : MonoBehaviour
         ds = new List<Transform>();
         lines = new List<GameObject>();
         DialogueTreeManager.tree.refreshLines.AddListener(UpdateLines);
+        DialogueTreeManager.tree.fullLineRefresh.AddListener(UpdateDisplay);
     }
     // Update is called once per frame
     void Update()

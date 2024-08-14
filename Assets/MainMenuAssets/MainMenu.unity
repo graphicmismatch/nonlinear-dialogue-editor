@@ -264,7 +264,7 @@ GameObject:
   - component: {fileID: 653899531}
   - component: {fileID: 653899530}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: LoadPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1245,7 +1245,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 20.00003, y: -26.234009}
+  m_AnchoredPosition: {x: 20, y: -26.234009}
   m_SizeDelta: {x: 200, y: 219.532}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1872645506
