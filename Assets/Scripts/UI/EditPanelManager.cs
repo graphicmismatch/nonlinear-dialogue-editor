@@ -40,8 +40,16 @@ public class EditPanelManager : MonoBehaviour
             v.value = currentlyEditing.dd.charIDs[j];
             j++;
         }
-
+        if (currentlyEditing.dd.charCurrentlySpeaking == -1)
+        {
+            speakSel[0].isOn = false;
+            speakSel[1].isOn = false;
+            speakSel[2].isOn = false;
+        }
+        else
+        {
             speakSel[currentlyEditing.dd.charCurrentlySpeaking].isOn = true;
+        }
 
 
     }

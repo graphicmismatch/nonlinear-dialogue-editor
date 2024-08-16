@@ -96,7 +96,34 @@ public class DialogueTreeManager : MonoBehaviour
         }
     }
 
+    public void exportNoCustomExtension()
+    {
+        try
+        {
+            DialogueTree export = new DialogueTree();
+            export.chars = chars.ToArray();
+            export.dialogues = dialogues.Values.ToArray<DialogueData>();
+            export.variables = variables;
+            string exp = JsonConvert.SerializeObject(export, Formatting.Indented);
 
+            if (!Directory.Exists(folder))
+            {
+                Directory.CreateDirectory(folder);
+            }
+            if (!File.Exists(folder + "/" + file + ".json"))
+            {
+                FileStream fs = File.Create(folder + "/" + file + ".json");
+                fs.Close();
+            }
+            File.WriteAllText(folder + "/" + file + ".json", exp);
+
+            Application.OpenURL(folder);
+        }
+        catch
+        {
+            return;
+        }
+    }
     public void Save()
     {
         try

@@ -9,9 +9,13 @@ public class SavePanelManager : MonoBehaviour
     public TMP_InputField folder;
     public TMP_InputField file;
     public void updateFolder(string s) {
+        s = s.Replace("\\", "/");
+        folder.text = s;
         DialogueTreeManager.tree.folder = s;
     }
     public void updateFile(string s) {
+        s = s.Replace("\\", "/");
+        file.text = s;
         DialogueTreeManager.tree.file = s;
     }
     public void loadPanel() {
