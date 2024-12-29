@@ -4,6 +4,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using System.IO;
 using UnityEngine.Events;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 
 public class DialogueTreeManager : MonoBehaviour
 {
@@ -68,6 +69,27 @@ public class DialogueTreeManager : MonoBehaviour
         g.GetComponent<DialogueOBJ>().loadData(dd);
         fullLineRefresh.Invoke();
 
+    }
+
+    public void deleteDialogue(DialogueData dd)
+    {
+        DialogueOBJ tempob = tree.dREF[dd.id];
+        DialogueData temp = tree.dREF[dd.id].dd;
+        updateIDsafter(dd.id, 1);
+        tree.dialogues.Remove(tempob);
+        tree.dREF.RemoveAt(dd.id);
+        Destroy(tempob.gameObject);
+        fullLineRefresh.Invoke();
+    }
+    public void updateIDsafter(int id,int offset) {
+        for (int i = id+1; i < dialogues.Values.Count;i++) {
+            tree.dialogues.Keys.ElementAt(i).dd.id -= offset;
+            int t = tree.dialogues.Keys.ElementAt(i).dd.id;
+            tree.dialogues[dialogues.Keys.ElementAt(i)].id = t;
+            tree.dREF[i].dd.id = t;
+            int c = tree.dREF[i].dd.options.Length;
+            
+        }
     }
     public void export() {
         try

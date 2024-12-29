@@ -45,8 +45,9 @@ public class DialogueOBJ : MonoBehaviour
     }
     public void UpdateDisplay() {
         Title.text = dd.id.ToString() + '-' + dd.title;
+        ds.Clear();
         foreach (OptionData op in dd.options) {
-            if (op.id >= 0 && op.id < DialogueTreeManager.tree.dREF.Count && op.id != dd.id) {
+            if (op.id >= 0 && op.id < DialogueTreeManager.tree.dREF.Count && op.id != dd.id && DialogueTreeManager.tree.dREF[op.id].entry != null) {
                 ds.Add(DialogueTreeManager.tree.dREF[op.id].entry);
             }
         }
@@ -56,6 +57,10 @@ public class DialogueOBJ : MonoBehaviour
         lines = new List<GameObject>();
         foreach (Transform e in ds)
         {
+            if (e == null) {
+                ds.Remove(e);
+                continue;
+            }
             GameObject g = Instantiate(lineObj, exit);
             List<Vector2> pts = new List<Vector2>();
             pts.Add(Vector2.zero);
@@ -70,6 +75,9 @@ public class DialogueOBJ : MonoBehaviour
     public void UpdateLines() {
         int counter = 0;
         foreach (GameObject g in lines) {
+            if (ds[counter] == null) {
+                continue;
+            }
             List<Vector2> pts = new List<Vector2>();
             pts.Add(Vector2.zero);
             pts.Add(exit.InverseTransformPoint(ds[counter].position));

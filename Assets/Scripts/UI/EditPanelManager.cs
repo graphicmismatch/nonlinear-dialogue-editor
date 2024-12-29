@@ -57,6 +57,12 @@ public class EditPanelManager : MonoBehaviour
     public void onClosePanel() {
         currentlyEditing.UpdateDisplay();
     }
+
+    public void onDeleteNode()
+    {
+        DialogueTreeManager.tree.deleteDialogue(currentlyEditing.dd);
+        currentlyEditing.UpdateDisplay();
+    }
     List<string> genCharTitles(Character[] op)
     {
         List<string> temp = new List<string>();
