@@ -22,6 +22,8 @@ public class Zoom : MonoBehaviour
         
     }
 
+    public void setDoZoom(bool t) { doZoom = t; }
+
     public void OnScroll(InputAction.CallbackContext ctx) {
         if (!doZoom) { return; }
         Vector2 v = ctx.ReadValue<Vector2>();
