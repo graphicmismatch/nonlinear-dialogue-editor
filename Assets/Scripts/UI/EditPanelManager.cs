@@ -28,6 +28,7 @@ public class EditPanelManager : MonoBehaviour
 
     public void Load(DialogueOBJ d) {
         Panel.SetActive(true);
+        Zoom.doZoom = false;
         currentlyEditing = d;
         title.text = currentlyEditing.dd.title;
         id.text = currentlyEditing.dd.id + "";
@@ -55,6 +56,7 @@ public class EditPanelManager : MonoBehaviour
     }
 
     public void onClosePanel() {
+        Zoom.doZoom = true;
         currentlyEditing.UpdateDisplay();
     }
 
@@ -92,9 +94,6 @@ public class EditPanelManager : MonoBehaviour
     }
     public void EditConnection(int id, int connID, string value)
     {
-        if (connID == null) {
-            connID = 0;
-        }
         currentlyEditing.dd.options[id].id = connID;
         currentlyEditing.dd.options[id].title = value;
     }
@@ -104,10 +103,6 @@ public class EditPanelManager : MonoBehaviour
     }
     public void EditConnection(int id, int connID)
     {
-        if (connID == null)
-        {
-            connID = 0;
-        }
         currentlyEditing.dd.options[id].id = connID;
     }
     public void AddConnection()

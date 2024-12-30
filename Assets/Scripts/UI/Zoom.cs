@@ -9,10 +9,11 @@ public class Zoom : MonoBehaviour
     public float zoomOutSens;
     public Vector2 zoomBounds;
     public Slider zoomSlider;
+    public static bool doZoom;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        doZoom = true;  
     }
 
     // Update is called once per frame
@@ -22,6 +23,7 @@ public class Zoom : MonoBehaviour
     }
 
     public void OnScroll(InputAction.CallbackContext ctx) {
+        if (!doZoom) { return; }
         Vector2 v = ctx.ReadValue<Vector2>();
         if (!Mathf.Approximately(v.y, 0))
         {
