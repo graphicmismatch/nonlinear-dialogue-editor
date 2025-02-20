@@ -107,7 +107,7 @@ public class DialogueTree
 <table>
 	<tr align="center">
 		<td>
-		John Doe
+		graphicmismatch (Rayan Madan)
 		<p align="center">
 			<img src = "https://avatars.githubusercontent.com/u/48159187" width="150" height="150" alt="graphicmismatch(Rayan Madan)">
 		</p>
