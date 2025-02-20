@@ -2,8 +2,8 @@
 <a href="https://dscvit.com">
 	<img width="400" src="https://user-images.githubusercontent.com/56252312/159312411-58410727-3933-4224-b43e-4e9b627838a3.png#gh-light-mode-only" alt="GDSC VIT"/>
 </a>
-	<h2 align="center"> < Insert Project Title Here > </h2>
-	<h4 align="center"> < Insert Project Description Here > <h4>
+	<h2 align="center"> WASDEditor </h2>
+	<h4 align="center"> A simple open-source dialogue system and editor <h4>
 </p>
 
 ---
@@ -15,31 +15,93 @@
 
 
 ## Features
-- [ ]  < feature >
-- [ ]  < feature >
-- [ ]  < feature >
-- [ ]  < feature >
+- [ ]  Character Creation
+- [ ]  Branching Dialogue Trees
+- [ ]  Designer Friendly
 
 <br>
 
 ## Dependencies
- - < dependency >
- - < dependency >
+This project requires the following tools and libraries to be edited:
+
+- Unity Engine (2023+)
+- Newtonsoft JSON (com.unity.nuget.newtonsoft-json)
+
+Newtonsoft JSON is also required to use the sample interpreter.
+No dependencies are required to run the editor application.
 
 
 ## Running
-
-
 < directions to install > 
-```bash
-< insert code >
+download the binaries from itch.io
+
+## Technical Details
+
+### Data Format
+
+The following class is used to generate the json output of the program. It uses the newtonsoft.json library to Serialize and Deserialize data.
+
+```csharp
+//Unused
+public struct VarConstOperation
+{
+    public string varName;
+    public VarOperators op; // VarOperators is an enum that remains unused for this version
+
+    public float num;
+}
+
+//Unused
+public struct VarVarOperation
+{
+    public string varName;
+    public VarOperators op; // VarOperators is an enum that remains unused for this version
+
+    public string var2Name;
+}
+
+// Following struct defines a Connection
+public struct OptionData
+{
+    public VarConstOperation[] constCheck; //Unused
+    public VarVarOperation[] varCheck; //Unused
+    public string title; // Used to store the content of the option
+    public int id; // id of the Option, also the index of self in the DialogueData.options array
+}
+
+// Following struct defines a Character
+public struct Character
+{
+    public int id; // unique id of the Character, also the index of self in the DialogueTree.chars array
+    public string Name; // name of the character
+}
+
+// Following class contains all data for the dialogue node
+public class DialogueData
+{
+    public int id; // unique id of the node, also the index of self in the DialogueTree.dialogues array
+    public string title; // title of the node
+    public string line; // actual content of the node
+    public OptionData[] options; // list of connections made from this node
+    public VarConstOperation[] variableConstantOperations; //Unused
+    public VarVarOperation[] variableVariableOperations; //Unused
+    public int[] charIDs; // refers to index in the DialogueTree.chars array
+    public int charCurrentlySpeaking; // refers to index in the charID array
+}
+
+// Following class contains all data for the dialogue tree
+public class DialogueTree
+{
+    public Dictionary<string, float> variables; //Unused
+    public Character[] chars; //Characters
+    public DialogueData[] dialogues; //List of dialogue nodes
+}
 ```
 
-< directions to execute >
 
-```bash
-< insert code >
-```
+## External Libraries/Packages Used
+
+- [UnityUILineRenderer](https://github.com/graphicmismatch/UnityUILineRenderer)
 
 ## Contributors
 
@@ -48,13 +110,13 @@
 		<td>
 		John Doe
 		<p align="center">
-			<img src = "https://dscvit.com/images/dsc-logo-square.svg" width="150" height="150" alt="Your Name Here (Insert Your Image Link In Src">
+			<img src = "https://avatars.githubusercontent.com/u/48159187" width="150" height="150" alt="graphicmismatch(Rayan Madan)">
 		</p>
 			<p align="center">
-				<a href = "https://github.com/person1">
+				<a href = "https://github.com/graphicmismatch">
 					<img src = "http://www.iconninja.com/files/241/825/211/round-collaboration-social-github-code-circle-network-icon.svg" width="36" height = "36" alt="GitHub"/>
 				</a>
-				<a href = "https://www.linkedin.com/in/person1">
+				<a href = "https://www.linkedin.com/in/rayan-madan/">
 					<img src = "http://www.iconninja.com/files/863/607/751/network-linkedin-social-connection-circular-circle-media-icon.svg" width="36" height="36" alt="LinkedIn"/>
 				</a>
 			</p>
