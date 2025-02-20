@@ -32,7 +32,6 @@ No dependencies are required to run the editor application.
 
 
 ## Running
-< directions to install > 
 download the binaries from itch.io
 
 ## Technical Details
